@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #fffafc;
+}
+
+/* Sección principal */
+.catalogo {
+  padding: 50px 20px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fef6f8 0%, #fffafc 100%);
+}
+
+.catalogo h1 {
+  text-align: center;
+  font-size: 3rem;
+  color: #e17091;
+  margin-bottom: 50px;
+}
+
+/* Contenedor de 3 columnas */
+.catalogo-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+
+/* Ficha 3D estilo carta */
+.ficha-producto {
+  flex: 0 0 280px; /* 👈 Fija el ancho sin que crezca o se estire */
+  max-width: 280px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 8px 8px 20px rgba(255, 182, 193, 0.3);
+  text-align: center;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 3px solid transparent;
+  overflow: hidden;
+  z-index: 1;
+  background-clip: padding-box;
+}
+
+
+/* Imagen */
+.ficha-producto img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* Nombre y precio */
+.ficha-producto h2 {
+  font-size: 1.3rem;
+  color: #c94f7c;
+  margin-bottom: 8px;
+}
+
+.ficha-producto .precio {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* Botón */
+.boton-whatsapp {
+  background-color: #ff8fab;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.boton-whatsapp:hover {
+  background-color: #f06292;
+}
+
+/* Efecto holográfico al pasar el mouse */
+.ficha-producto::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: skewX(-25deg);
+  transition: left 0.8s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ficha-producto:hover::before {
+  left: 125%;
+}
+
+.ficha-producto:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 18px rgba(255, 182, 193, 0.3);
+  border: 4px solid transparent;
+
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(
+      135deg,
+      #ffb6c1,
+      #ffd6e5,
+      #b3f4ff,
+      #caffbf,
+      #ffc6ff,
+      #ffb6c1
+    ) border-box;
+  background-clip: padding-box, border-box;
+  background-size: 400% 400%;
+  background-position: 0% 50%;
+  animation: brillo-holo 4s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .catalogo-contenedor {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogo-contenedor {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.boton-volver {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #ffe4ec;
+  color: #c94f7c;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.boton-volver:hover {
+  background-color: #ffcfe1;
+  color: #a03e65;
+  transform: scale(1.05);
+}
+
+@keyframes borde-brillante {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* Ventana emergente para mostrar la imagen en grande */
+.popup-imagen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-imagen img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.popup-imagen .cerrar {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.popup-imagen .cerrar:hover {
+  color: #ff8fab;
+}
+
+
+.footer {
+    background-color: rgba(175, 238, 238, 0.8); /* tono pastel suave */
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #5a5a5a;
+    margin-top: 30px;
+}
+
+.footer a {
+    color: #5a5a5a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    color: #c77d72;
+    text-decoration: underline;
+}
+
+.footer-contenido p {
+    margin: 8px 0;
+}
+
+.icono-ig {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 6px;
+  transition: transform 0.3s ease;
+}
+
+.footer a:hover .icono-ig {
+  transform: scale(1.2);
+}
+
+.descarga-catalogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background: linear-gradient(180deg, #fef6f8 0%, #fffafc 100%);
+}
+
+.descarga-contenedor {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 30px 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.descarga-contenedor h2 {
+  font-size: 1.8rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.boton-descarga {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1rem;
+  background-color: #20c997; /* turquesa pastel */
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.boton-descarga:hover {
+  background-color: #17a288;
+  transform: scale(1.05);
+}
+
+.decoracion-icono {
+  font-size: 2rem;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.subtitulo-seccion {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.8rem;
+  color: #d178a5;
+  margin: 50px 0 20px;
+  text-align: center;
+  position: relative;
+}
+
+.subtitulo-seccion::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #f7b6c2;
+  margin: 10px auto 0;
+  border-radius: 10px;
+}
+
+.grupo-productos {
+  margin: 60px auto;
+}
+
+.fichas-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}

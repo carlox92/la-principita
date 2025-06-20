@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Principita</title>
+    <link rel="stylesheet" href="estilo.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+    <header class="encabezado">
+        <h1>La Principita</h1>
+        <img src="imagenes/Untitled.png" alt="Codigo QR" class="codigo-qr">
+    
+
+        <div class="logo-wrapper">
+            <img src="imagenes/principita logo.png" alt="Logo" class="logo-negocio">
+        </div>
+    </header>
+    
+    <section class="cuerpo-principal">
+  <div class="mensaje-central">
+    <p>"Todo empezó con un ovillo, una taza de té y las manos cálidas de mamá. Hoy, cada creación tiene su alma. ¡Descubre nuestro catálogo de ternura!"</p>
+  </div>
+</section>
+
+
+    <section class="bienvenida">
+  <div class="texto">
+    <h2>Bienvenido al mundo de La Principita</h2>
+    <p>
+      Cada puntada es una historia tejida con amor. Descubre muñecas únicas, suaves y adorables, creadas para quienes valoran lo especial.
+    </p>
+    <a href="catalogo.html" class="boton-catalogo">Ver Catálogo</a>
+  </div>
+</section>
+
+<section class="video-presentacion">
+  <div class="video-marco" onclick="iniciarVideo()">
+    <div class="preview-video" id="preview">
+      <img src="imagenes/IMG-20250618-WA0215.jpg" alt="Miniatura del video">
+      <div class="boton-play">▶</div>
+    </div>
+
+    <video id="videito" width="300" style="display: none;">
+      <source src="imagenes/videito.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+  </div>
+</section>
+
+<section class="galeria-previa">
+  <h3>Lo más tierno del mes</h3>
+  <div class="tarjetas">
+    
+    <a href="catalogo.html" class="tarjeta">
+      <img src="imagenes/munequita elegante rosa.png" alt="Muñeca 1">
+      <p>Favorita del mes</p>
+    </a>
+    
+    <a href="catalogo.html" class="tarjeta">
+      <img src="imagenes/conejito verde.png" alt="Muñeca 2">
+      <p>Para regalar</p>
+    </a>
+    
+    <a href="catalogo.html" class="tarjeta">
+      <img src="imagenes/munequita elegante rosa 2.png" alt="Muñeca 3">
+      <p>Edición especial</p>
+    </a>
+
+  </div>
+</section>
+
+<section class="frase-banner">
+  <p>🌸 Muñecas tejidas a mano con magia ✨ — Descubre el catálogo 🌸</p>
+</section>
+
+<section class="testimonios">
+  <blockquote class="testimonio activo">
+    “Mi hija duerme abrazada a su muñequita cada noche. ¡Gracias por tanto amor en cada detalle!”
+  </blockquote>
+  <blockquote class="testimonio">
+    “Quedamos sorprendidos con la calidad y ternura del producto. Recomendadísimo.”
+  </blockquote>
+  <blockquote class="testimonio">
+    “Fue el regalo perfecto. La atención fue súper amable y rápida. ¡Gracias!”
+  </blockquote>
+</section>
+
+
+    <footer class="footer">
+  <div class="footer-contenido">
+    <p>Hecho en Perú con mucho amor 🧶</p>
+    <p><a href="https://wa.me/51990716903" target="_blank">
+  <i class="fas fa-mobile-alt" style="color: black; margin-right: 8px;"></i>
+  Contáctanos por WhatsApp
+
+</a></p>
+  
+    <p>
+   <a href="https://instagram.com/laprincipita_lima" target="_blank">
+    <img src="imagenes/instagram real.png" alt="Instagram" class="icono-ig"> @laprincipita_lima
+  </a>
+    </p>
+
+    <p>
+   <a href="https://www.facebook.com/laprincipitalima" target="_blank">
+    <img src="imagenes/facebook real.png" alt="Facebook" class="icono-ig"> @laprincipitalima
+  </a>
+    </p>
+
+     <p>© 2025 La Principita.</p>
+  </div>
+
+</footer>
+
+<script>
+function iniciarVideo() {
+  const preview = document.getElementById('preview');
+  const video = document.getElementById('videito');
+
+  preview.style.display = 'none';
+  video.style.display = 'block';
+  video.setAttribute('controls', true);
+  video.play();
+
+  video.onended = function () {
+    video.pause();
+    video.currentTime = 0;
+    video.removeAttribute('controls');
+    video.style.display = 'none';
+    preview.style.display = 'block';
+  };
+}
+</script>
+
+<script>
+  const testimonios = document.querySelectorAll('.testimonio');
+  let indice = 0;
+
+  function mostrarSiguienteTestimonio() {
+    testimonios[indice].classList.remove('activo');
+    indice = (indice + 1) % testimonios.length;
+    testimonios[indice].classList.add('activo');
+  }
+
+  setInterval(mostrarSiguienteTestimonio, 5000); // 10 segundos
+</script>
+</body>
+</html>
